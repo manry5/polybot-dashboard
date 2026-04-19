@@ -622,8 +622,8 @@ export default function PolybotDashboard() {
             ) : (
               <div className="markets-grid">
                 {filteredMarkets.map((m, i) => {
-                  const yes = parseFloat(m.outcomePrices?.[0] || 0.5);
-                  const no = parseFloat(m.outcomePrices?.[1] || 0.5);
+                  const yes = parseFloat(m.outcomePrices?.[0] ?? m.bestAsk ?? 0.5);
+				  const no = 1 - yes;
                   const isArb = yes + no < 0.97;
                   const vol = m.volume ? parseFloat(m.volume).toLocaleString("en", { maximumFractionDigits: 0 }) : "—";
                   return (
