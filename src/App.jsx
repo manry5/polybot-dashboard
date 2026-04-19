@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 const BOT_API = import.meta.env?.VITE_BOT_API || "http://localhost:3001";
-const GAMMA = "https://gamma-api.polymarket.com";
+const GAMMA = BOT_API;
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap');
@@ -455,7 +455,7 @@ export default function PolybotDashboard() {
 
   const fetchMarkets = useCallback(async () => {
     try {
-      const r = await fetch(`${GAMMA}/markets?limit=80&active=true`);
+      const r = await fetch(`${GAMMA}/markets`);
       const d = await r.json();
       setMarkets(Array.isArray(d) ? d : []);
     } catch {
